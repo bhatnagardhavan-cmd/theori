@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>थ्योरी — Fine Dine Elegance</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream: #F7F1E4;
+  --cream-dark: #EDE3CC;
+  --cream-deep: #DED1B3;
+  --gold: #B8934A;
+  --gold-light: #D4AE6A;
+  --gold-dark: #9A7635;
+  --gold-muted: #C9A96E;
+  --green: #3D7335;
+  --green-dark: #2A5425;
+  --charcoal: #1E1810;
+  --charcoal-mid: #3A3020;
+  --charcoal-light: #6B5F4A;
+  --white: #FDFAF4;
+  --shadow: rgba(30,24,16,0.14);
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--cream);
+  color: var(--charcoal);
+  overflow-x: hidden;
+}
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--cream-dark); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.4;
+}
+
+/* ── DEVANAGARI FONT ── */
+.devanagari {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-weight: 400;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 4rem; height: 76px;
+  background: rgba(247, 241, 228, 0.93);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(184,147,74,0.18);
+  transition: all 0.4s ease;
+}
+nav.scrolled {
+  height: 62px;
+  background: rgba(237, 227, 204, 0.97);
+  border-bottom-color: rgba(184,147,74,0.38);
+  box-shadow: 0 2px 24px rgba(30,24,16,0.07);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-img {
+  width: 48px; height: 48px; border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid rgba(184,147,74,0.4);
+  box-shadow: 0 2px 12px rgba(184,147,74,0.15);
+}
+.nav-logo-text {
+  display: flex; flex-direction: column; gap: 1px;
+}
+.nav-logo-en {
+  font-family: 'Cinzel', serif;
+  font-size: 17px; font-weight: 500;
+  color: var(--charcoal); letter-spacing: 0.1em;
+  line-height: 1;
+}
+.nav-logo-hi {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: 11px; color: var(--gold-dark);
+  letter-spacing: 0.05em; line-height: 1;
+}
+.nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
+.nav-links a {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--charcoal-mid);
+  text-decoration: none; position: relative; padding-bottom: 2px;
+  transition: color 0.3s;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1px; background: var(--gold);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover { color: var(--gold-dark); }
+.nav-links a:hover::after { width: 100%; }
+.nav-reserve {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--white); background: var(--charcoal);
+  border: none; cursor: pointer;
+  padding: 10px 22px; text-decoration: none;
+  transition: background 0.3s, transform 0.2s;
+  display: inline-block;
+}
+.nav-reserve:hover { background: var(--gold-dark); transform: translateY(-1px); }
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; background: none; border: none; padding: 4px;
+}
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--charcoal); transition: all 0.3s; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: var(--cream);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; padding-top: 76px;
+}
+.hero-bg-pattern {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 20% 50%, rgba(184,147,74,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 80% 30%, rgba(61,115,53,0.04) 0%, transparent 70%),
+    radial-gradient(circle at 50% 100%, rgba(184,147,74,0.08) 0%, transparent 50%);
+}
+.hero-lines { position: absolute; inset: 0; pointer-events: none; }
+.hero-line-h {
+  position: absolute; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184,147,74,0.15), transparent);
+}
+.hero-line-v {
+  position: absolute; top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(184,147,74,0.15), transparent);
+}
+.hero-bg-text {
+  position: absolute;
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: clamp(100px, 20vw, 240px);
+  color: rgba(184, 147, 74, 0.055);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap; pointer-events: none; user-select: none;
+  letter-spacing: -0.02em;
+}
+.hero-content {
+  text-align: center; position: relative; z-index: 2;
+  padding: 0 2rem;
+  animation: heroFadeIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(36px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-tagline {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 0.45em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 2.5rem;
+}
+.hero-logo-emblem {
+  width: 140px; height: 140px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 2.5rem; position: relative;
+  box-shadow:
+    0 0 0 10px rgba(184,147,74,0.07),
+    0 0 0 20px rgba(184,147,74,0.035),
+    0 8px 40px rgba(184,147,74,0.18);
+}
+.hero-logo-emblem img {
+  width: 140px; height: 140px; border-radius: 50%; object-fit: cover;
+}
+.hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(44px, 8vw, 92px);
+  font-weight: 400; color: var(--charcoal);
+  letter-spacing: 0.18em; line-height: 1; margin-bottom: 0.5rem;
+}
+.hero-title span { color: var(--gold); }
+.hero-title-hindi {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: clamp(22px, 4vw, 42px);
+  color: var(--gold-dark); letter-spacing: 0.05em;
+  margin-bottom: 0.75rem; line-height: 1.2;
+  display: block;
+}
+.hero-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(16px, 2.2vw, 24px);
+  font-weight: 300; font-style: italic;
+  color: var(--charcoal-light); letter-spacing: 0.04em;
+  margin-bottom: 0.4rem;
+}
+.hero-subtitle-hindi {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: clamp(13px, 1.5vw, 17px);
+  color: rgba(107,95,74,0.7); margin-bottom: 3rem;
+  display: block; letter-spacing: 0.02em;
+}
+.hero-divider {
+  display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 3rem;
+}
+.hero-divider-line { width: 60px; height: 1px; background: var(--gold-muted); }
+.hero-divider-diamond { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); }
+.hero-ctas { display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+.btn-primary {
+  font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 500;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--white); background: var(--charcoal);
+  border: 1px solid var(--charcoal); padding: 13px 34px;
+  text-decoration: none; cursor: pointer; transition: all 0.3s; display: inline-block;
+}
+.btn-primary:hover { background: var(--gold-dark); border-color: var(--gold-dark); }
+.btn-secondary {
+  font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 500;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--charcoal); background: transparent;
+  border: 1px solid var(--gold-muted); padding: 13px 34px;
+  text-decoration: none; cursor: pointer; transition: all 0.3s; display: inline-block;
+}
+.btn-secondary:hover { background: var(--gold); color: var(--white); border-color: var(--gold); }
+.hero-scroll {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  animation: heroFadeIn 1.4s 0.7s cubic-bezier(0.22,1,0.36,1) both;
+}
+.hero-scroll span {
+  font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--gold-muted); font-weight: 400;
+}
+.scroll-bar { width: 1px; height: 38px; background: var(--gold-muted); position: relative; overflow: hidden; }
+.scroll-bar::after {
+  content: ''; position: absolute; top: -100%; left: 0;
+  width: 100%; height: 100%; background: var(--gold);
+  animation: scrollDown 1.8s ease infinite;
+}
+@keyframes scrollDown { to { top: 100%; } }
+
+/* ── SECTION BASE ── */
+section { padding: 7rem 4rem; }
+.section-label {
+  font-size: 10px; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.6rem; display: block;
+}
+.section-title {
+  font-family: 'Cinzel', serif; font-size: clamp(26px, 3.8vw, 46px);
+  font-weight: 400; color: var(--charcoal); letter-spacing: 0.08em;
+  line-height: 1.2; margin-bottom: 0.3rem;
+}
+.section-title-hindi {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: clamp(16px, 2.2vw, 26px);
+  color: var(--gold-dark); display: block; margin-bottom: 0.4rem;
+}
+.section-subtitle {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(15px, 1.8vw, 20px);
+  font-weight: 300; font-style: italic; color: var(--charcoal-light); margin-bottom: 0.3rem;
+}
+.section-subtitle-hindi {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: clamp(12px, 1.4vw, 15px);
+  color: rgba(107,95,74,0.65); display: block; margin-bottom: 2.5rem;
+}
+.ornament { display: flex; align-items: center; gap: 12px; margin-bottom: 3rem; }
+.ornament-line { height: 1px; background: var(--gold-muted); }
+.ornament-line.short { width: 40px; }
+.ornament-line.long { flex: 1; max-width: 80px; }
+.ornament-diamond { width: 5px; height: 5px; background: var(--gold); transform: rotate(45deg); }
+
+/* ── MARQUEE STRIP ── */
+.marquee-strip {
+  background: var(--gold);
+  padding: 10px 0; overflow: hidden; white-space: nowrap;
+}
+.marquee-inner { display: inline-flex; animation: marquee 22s linear infinite; }
+.marquee-inner span {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: 13px; color: rgba(255,255,255,0.9);
+  padding: 0 2.5rem; letter-spacing: 0.06em;
+}
+.marquee-inner span.en {
+  font-family: 'Cinzel', serif; font-size: 11px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+}
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* ── STORY ── */
+.story { background: var(--charcoal); display: grid; grid-template-columns: 1fr 1.1fr; gap: 0; padding: 0; overflow: hidden; }
+.story-visual {
+  position: relative; min-height: 600px;
+  background: linear-gradient(135deg, #1E1810 0%, #2E2415 50%, #1A1408 100%);
+  overflow: hidden; display: flex; align-items: center; justify-content: center;
+}
+.story-visual-pattern {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 30% 40%, rgba(184,147,74,0.12) 0%, transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(61,115,53,0.07) 0%, transparent 50%);
+}
+.story-visual-logo {
+  width: 200px; height: 200px; border-radius: 50%; object-fit: cover;
+  border: 2px solid rgba(184,147,74,0.5);
+  box-shadow: 0 0 0 16px rgba(184,147,74,0.06), 0 0 0 32px rgba(184,147,74,0.03), 0 20px 60px rgba(0,0,0,0.5);
+  position: relative; z-index: 2;
+}
+.story-visual-ring {
+  position: absolute; border-radius: 50%; border: 1px solid rgba(184,147,74,0.1);
+  z-index: 1; animation: pulse-ring 4s ease infinite;
+}
+@keyframes pulse-ring {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.15; transform: scale(1.03); }
+}
+.story-content { padding: 7rem 5rem; display: flex; flex-direction: column; justify-content: center; }
+.story-content .section-label { color: var(--gold-light); }
+.story-content .section-title { color: var(--cream); }
+.story-content .section-title-hindi { color: var(--gold-light); opacity: 0.85; }
+.story-content .section-subtitle { color: rgba(247,241,228,0.6); }
+.story-content .section-subtitle-hindi { color: rgba(247,241,228,0.4); margin-bottom: 2rem; }
+.story-text {
+  font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400;
+  line-height: 1.9; color: rgba(247,241,228,0.72); margin-bottom: 1.2rem;
+}
+.story-text-hindi {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: 14px; line-height: 1.9;
+  color: rgba(247,241,228,0.48); margin-bottom: 1.8rem;
+  font-style: italic;
+}
+.story-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2rem; margin-top: 3rem;
+  border-top: 1px solid rgba(184,147,74,0.2); padding-top: 2.5rem;
+}
+.stat-num {
+  font-family: 'Cinzel', serif; font-size: 36px; font-weight: 400;
+  color: var(--gold-light); display: block; margin-bottom: 4px;
+}
+.stat-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(247,241,228,0.45); }
+.stat-label-hindi {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: 11px; color: rgba(247,241,228,0.3);
+  display: block; margin-top: 2px;
+}
+
+/* ── MENU ── */
+.menu-section { background: var(--white); }
+.menu-header { text-align: center; max-width: 600px; margin: 0 auto 4rem; }
+.menu-header .ornament { justify-content: center; }
+.menu-tabs {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; margin-bottom: 4rem;
+  border: 1px solid rgba(184,147,74,0.28);
+  width: fit-content; margin-left: auto; margin-right: auto;
+}
+.menu-tab {
+  font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 400;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--charcoal-light); background: transparent; border: none;
+  padding: 11px 26px; cursor: pointer; transition: all 0.3s;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+}
+.menu-tab .tab-hindi {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: 11px; letter-spacing: 0.02em; text-transform: none;
+  color: rgba(107,95,74,0.5); transition: color 0.3s;
+}
+.menu-tab + .menu-tab { border-left: 1px solid rgba(184,147,74,0.28); }
+.menu-tab.active { background: var(--gold); color: var(--white); }
+.menu-tab.active .tab-hindi { color: rgba(255,255,255,0.75); }
+.menu-tab:not(.active):hover { color: var(--gold-dark); background: rgba(184,147,74,0.05); }
+.menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border: 1px solid rgba(184,147,74,0.14); }
+.menu-panel { display: none; }
+.menu-panel.active { display: contents; }
+.menu-item {
+  padding: 1.8rem 2.4rem;
+  border-bottom: 1px solid rgba(184,147,74,0.1);
+  border-right: 1px solid rgba(184,147,74,0.1);
+  transition: background 0.3s; position: relative;
+}
+.menu-item:nth-child(2n) { border-right: none; }
+.menu-item:hover { background: rgba(184,147,74,0.03); }
+.menu-item-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.25rem; }
+.menu-item-name { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 500; color: var(--charcoal); }
+.menu-item-name-hindi { font-family: 'Tiro Devanagari Hindi', serif; font-size: 12px; color: var(--gold-dark); opacity: 0.7; display: block; margin-bottom: 4px; }
+.menu-item-price { font-family: 'Cinzel', serif; font-size: 14px; font-weight: 400; color: var(--gold-dark); white-space: nowrap; margin-left: 1rem; }
+.menu-item-desc { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 300; font-style: italic; color: var(--charcoal-light); line-height: 1.6; }
+.menu-item-tag {
+  display: inline-block; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--green); border: 1px solid rgba(61,115,53,0.3); padding: 2px 8px; margin-top: 8px;
+}
+.menu-cta { text-align: center; margin-top: 3rem; }
+
+/* ── SPECIALS ── */
+.specials { background: var(--cream-dark); text-align: center; }
+.specials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 4rem; }
+.special-card {
+  background: var(--white); padding: 3rem 2.5rem;
+  position: relative; overflow: hidden; transition: transform 0.4s ease;
+}
+.special-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: linear-gradient(90deg, var(--gold), var(--green));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+}
+.special-card:hover { transform: translateY(-6px); }
+.special-card:hover::before { transform: scaleX(1); }
+.special-icon {
+  width: 56px; height: 56px; border-radius: 50%;
+  border: 1px solid rgba(184,147,74,0.3);
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;
+}
+.special-icon svg { width: 26px; height: 26px; }
+.special-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; color: var(--charcoal); margin-bottom: 0.3rem; }
+.special-title-hindi { font-family: 'Tiro Devanagari Hindi', serif; font-size: 13px; color: var(--gold-dark); display: block; margin-bottom: 0.75rem; }
+.special-desc { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; font-style: italic; color: var(--charcoal-light); line-height: 1.8; }
+
+/* ── RESERVATION ── */
+.reservation { background: var(--charcoal); padding: 7rem 4rem; }
+.reservation-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+.reservation .section-label { color: var(--gold-light); }
+.reservation .section-title { color: var(--cream); }
+.reservation .section-title-hindi { color: var(--gold-light); opacity: 0.8; }
+.reservation .section-subtitle { color: rgba(247,241,228,0.6); }
+.reservation .section-subtitle-hindi { color: rgba(247,241,228,0.38); }
+.reservation .ornament { justify-content: center; }
+.reservation-form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 3rem; }
+.form-group { display: flex; flex-direction: column; gap: 8px; text-align: left; }
+.form-group.full { grid-column: 1 / -1; }
+.form-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(247,241,228,0.45); font-weight: 400; }
+.form-input, .form-select, .form-textarea {
+  background: rgba(247,241,228,0.05);
+  border: 1px solid rgba(184,147,74,0.22);
+  color: var(--cream); font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; font-weight: 300;
+  padding: 12px 16px; outline: none; width: 100%;
+  transition: border-color 0.3s; appearance: none;
+}
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(247,241,228,0.25); }
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--gold-muted); }
+.form-select { cursor: pointer; }
+.form-select option { background: var(--charcoal); color: var(--cream); }
+.form-textarea { resize: vertical; min-height: 88px; }
+.btn-reserve {
+  width: 100%; font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--charcoal); background: var(--gold);
+  border: none; padding: 16px; cursor: pointer; margin-top: 0.5rem;
+  transition: background 0.3s, transform 0.2s;
+}
+.btn-reserve:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+/* ── GALLERY ── */
+.gallery-section { background: var(--white); padding: 7rem 4rem; }
+.gallery-header { text-align: center; margin-bottom: 4rem; }
+.gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+.gallery-item {
+  background: var(--cream-dark); overflow: hidden; position: relative;
+  aspect-ratio: 1; display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.gallery-item.wide { grid-column: span 2; }
+.gallery-item.tall { grid-row: span 2; }
+.gallery-placeholder {
+  width: 100%; height: 100%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 12px;
+  font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic;
+  color: rgba(44,36,24,0.35); padding: 2rem; text-align: center;
+}
+.gallery-placeholder svg { opacity: 0.22; }
+.gallery-overlay {
+  position: absolute; inset: 0; background: rgba(30,24,16,0);
+  transition: background 0.4s; display: flex; align-items: center; justify-content: center;
+}
+.gallery-item:hover .gallery-overlay { background: rgba(30,24,16,0.52); }
+.gallery-overlay-text {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: 15px; color: var(--cream);
+  opacity: 0; transition: opacity 0.4s; text-align: center; padding: 1rem;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.gallery-overlay-text span.en {
+  font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+}
+.gallery-item:hover .gallery-overlay-text { opacity: 1; }
+
+/* ── CONTACT ── */
+.contact { background: var(--cream); padding: 7rem 4rem; }
+.contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; max-width: 1100px; margin: 0 auto; }
+.contact-info-item { display: flex; gap: 1.5rem; margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(184,147,74,0.14); }
+.contact-info-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.contact-icon { width: 44px; height: 44px; flex-shrink: 0; border: 1px solid rgba(184,147,74,0.3); display: flex; align-items: center; justify-content: center; }
+.contact-icon svg { width: 18px; height: 18px; }
+.contact-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 5px; }
+.contact-value { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; color: var(--charcoal); line-height: 1.5; }
+.contact-value-hindi { font-family: 'Tiro Devanagari Hindi', serif; font-size: 13px; color: var(--charcoal-light); display: block; margin-top: 4px; }
+.map-placeholder {
+  background: var(--cream-dark); height: 420px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
+  border: 1px solid rgba(184,147,74,0.2); position: relative; overflow: hidden;
+}
+.map-placeholder-text { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; color: var(--charcoal-light); }
+.map-placeholder-hindi { font-family: 'Tiro Devanagari Hindi', serif; font-size: 13px; color: rgba(107,95,74,0.6); }
+.map-pin { animation: bounce 2s ease infinite; }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+/* ── SOCIAL ── */
+.social-strip {
+  background: linear-gradient(135deg, var(--charcoal) 0%, #2E2415 100%);
+  padding: 3rem 4rem;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid rgba(184,147,74,0.2);
+}
+.social-strip-text { font-family: 'Cinzel', serif; font-size: 18px; font-weight: 400; color: var(--cream); letter-spacing: 0.08em; }
+.social-strip-hindi { font-family: 'Tiro Devanagari Hindi', serif; font-size: 14px; color: var(--gold-light); margin-top: 4px; }
+.social-strip-sub { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic; color: rgba(247,241,228,0.5); margin-top: 3px; }
+.social-links { display: flex; align-items: center; gap: 1rem; }
+.social-link {
+  width: 44px; height: 44px; border: 1px solid rgba(184,147,74,0.35);
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; color: var(--gold-light); transition: all 0.3s;
+}
+.social-link:hover { background: rgba(184,147,74,0.15); border-color: var(--gold); }
+.social-link svg { width: 18px; height: 18px; }
+
+/* ── FOOTER ── */
+footer { background: #100E08; padding: 5rem 4rem 2rem; border-top: 1px solid rgba(184,147,74,0.12); }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+.footer-brand-name { font-family: 'Cinzel', serif; font-size: 22px; color: var(--cream); letter-spacing: 0.1em; display: block; margin-bottom: 4px; }
+.footer-brand-hindi { font-family: 'Tiro Devanagari Hindi', serif; font-size: 14px; color: var(--gold-muted); display: block; margin-bottom: 1rem; }
+.footer-brand-desc { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; font-style: italic; color: rgba(247,241,228,0.45); line-height: 1.8; margin-bottom: 0.6rem; }
+.footer-brand-desc-hindi { font-family: 'Tiro Devanagari Hindi', serif; font-size: 12px; color: rgba(247,241,228,0.3); line-height: 1.8; margin-bottom: 1.5rem; }
+.footer-col-title { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-muted); margin-bottom: 1.5rem; display: block; }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 0.75rem; }
+.footer-links a { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: rgba(247,241,228,0.5); text-decoration: none; transition: color 0.3s; }
+.footer-links a:hover { color: var(--gold-light); }
+.footer-hours p { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; color: rgba(247,241,228,0.5); margin-bottom: 0.5rem; line-height: 1.6; }
+.footer-bottom { border-top: 1px solid rgba(184,147,74,0.12); padding-top: 2rem; display: flex; align-items: center; justify-content: space-between; }
+.footer-copy { font-size: 11px; color: rgba(247,241,228,0.25); letter-spacing: 0.05em; }
+.footer-copy-hindi { font-family: 'Tiro Devanagari Hindi', serif; font-size: 11px; color: rgba(184,147,74,0.25); margin-top: 3px; display: block; }
+.footer-bottom-links { display: flex; gap: 2rem; list-style: none; }
+.footer-bottom-links a { font-size: 11px; color: rgba(247,241,228,0.25); text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
+.footer-bottom-links a:hover { color: var(--gold-light); }
+
+/* ── MOBILE MENU ── */
+.mobile-menu {
+  display: none; position: fixed; inset: 0; z-index: 99;
+  background: var(--cream); flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-family: 'Cinzel', serif; font-size: 22px; font-weight: 400; letter-spacing: 0.1em; color: var(--charcoal); text-decoration: none; transition: color 0.3s; }
+.mobile-menu a:hover { color: var(--gold); }
+.mobile-close { position: absolute; top: 28px; right: 2rem; font-size: 28px; background: none; border: none; cursor: pointer; color: var(--charcoal); line-height: 1; }
+
+/* ── FADE IN ── */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  nav { padding: 0 2rem; }
+  section { padding: 5rem 2rem; }
+  .story { grid-template-columns: 1fr; }
+  .story-visual { min-height: 320px; }
+  .story-content { padding: 5rem 2rem; }
+  .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .social-strip { flex-direction: column; gap: 1.5rem; text-align: center; }
+}
+@media (max-width: 768px) {
+  .nav-links, .nav-reserve { display: none; }
+  .hamburger { display: flex; }
+  .specials-grid { grid-template-columns: 1fr; }
+  .menu-grid { grid-template-columns: 1fr; }
+  .menu-item { border-right: none !important; }
+  .reservation-form { grid-template-columns: 1fr; }
+  .reservation-form .form-group.full { grid-column: 1; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-item.wide { grid-column: span 1; }
+  .gallery-item.tall { grid-row: span 1; }
+  .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+  .menu-tabs { flex-wrap: wrap; width: 100%; }
+  .menu-tab { flex: 1; text-align: center; }
+  section { padding: 4rem 1.5rem; }
+  .reservation { padding: 5rem 1.5rem; }
+  .social-strip { padding: 2.5rem 1.5rem; }
+  footer { padding: 4rem 1.5rem 2rem; }
+  nav { padding: 0 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">
+    <img src="data:image/jpeg;base64,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" alt="थ्योरी Logo" class="nav-logo-img">
+    <div class="nav-logo-text">
+      <span class="nav-logo-en">Theori</span>
+      <span class="nav-logo-hi">थ्योरी · Fine Dine Elegance</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#specials">Experience</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#reservation" class="nav-reserve">मेज़ बुक करें</a>
+  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
+  <a href="#story" onclick="toggleMobileMenu()">Our Story</a>
+  <a href="#menu" onclick="toggleMobileMenu()">Menu</a>
+  <a href="#specials" onclick="toggleMobileMenu()">Experience</a>
+  <a href="#reservation" onclick="toggleMobileMenu()">Reservations</a>
+  <a href="#gallery" onclick="toggleMobileMenu()">Gallery</a>
+  <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-strip" style="margin-top:76px;">
+  <div class="marquee-inner">
+    <span>स्वाद की एक अनोखी यात्रा</span>
+    <span class="en">·  Fine Dine Elegance  ·</span>
+    <span>परंपरा और आधुनिकता का संगम</span>
+    <span class="en">·  Bhopal, Madhya Pradesh  ·</span>
+    <span>हर पल एक यादगार अनुभव</span>
+    <span class="en">·  Reserve Your Table  ·</span>
+    <span>स्वाद की एक अनोखी यात्रा</span>
+    <span class="en">·  Fine Dine Elegance  ·</span>
+    <span>परंपरा और आधुनिकता का संगम</span>
+    <span class="en">·  Bhopal, Madhya Pradesh  ·</span>
+    <span>हर पल एक यादगार अनुभव</span>
+    <span class="en">·  Reserve Your Table  ·</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home" style="margin-top:-76px; padding-top: 76px;">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-lines">
+    <div class="hero-line-h" style="top:28%"></div>
+    <div class="hero-line-h" style="top:72%"></div>
+    <div class="hero-line-v" style="left:12%"></div>
+    <div class="hero-line-v" style="right:12%"></div>
+  </div>
+  <div class="hero-bg-text">थ्योरी</div>
+  <div class="hero-content">
+    <p class="hero-tagline">Fine Dine Elegance · भोपाल</p>
+    <div class="hero-logo-emblem">
+      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/7QCEUGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAGgcAigAYkZCTUQwYTAwMGFkOTAxMDAwMDQ1MDMwMDAwOTkwNDAwMDBkODA0MDAwMGZlMDQwMDAwZmUwNjAwMDA0NjBhMDAwMDlmMGEwMDAwZjQwYTAwMDAyOTBiMDAwMGYwMGUwMDAwAP/bAIQABQYGCwgLCwsLCw0LCwsNDg4NDQ4ODw0ODg4NDxAQEBEREBAQEA8TEhMPEBETFBQTERMWFhYTFhUVFhkWGRYWEgEFBQUKBwoICQkICwgKCAsKCgkJCgoMCQoJCgkMDQsKCwsKCw0MCwsICwsMDAwNDQwMDQoLCg0MDQ0MExQTExOc/8IAEQgAlgCWAwEiAAIRAQMRAf/EAKQAAAICAwEAAAAAAAAAAAAAAAABAgcDBAUGEAACAgECBQMDBAMAAAAAAAABAgADEQQSExQgITAQIkAjMTMFMmBhkbHBEQABAgMDCAYIBwAAAAAAAAABABECITESQVEDECIwYXGB0SAykaGx8CMzQFJicqLhQ1NggpLB8RIAAgEDAgUEAwEBAQAAAAAAAREAITFBUWEQcYGRoSAwsfDB0eFA8WD/2gAMAwEAAgADAAAAAbKcXr5GNMaYANADAQ0DEwAAAAdY2bWQrJaaYDYAAMYASCKnEE0wTQDBA6ys2shWRKLGxAMjoJ7PnNToY8nAw+68CY+h3qw9cYLFVe2FkzgDTEAVnZlZisdoTbiw1/Odbi48m35L3nmCL8T1M5rqyMfnzNh60eAZbITWXEAA6zsyswsZoQ4iDhw5vRx5PLb/ADpRnCeXYDY0dnaDUhv42vaZE8uIAadaWXWgWK0IIyA8vp+r8RCfoNrncWM/S8LnSD2PO5Ww1sdHS9GG2BlxAAFa2TWyLEaAbQEON3IJ11u+w5kZcve5jUtx5u41g6UXODAaAAda2VWqLEEwfL6esnzo7kE3p9GAaOzkyhi1tqAQlkTJOWQNx4+S10699R5dFhtDTEBITABA2gGhgxAMIBzNQ6yeLxHovOssQrsFYhXYFiFdgWIV2BYrrkCxSugLGdcAWH5fiCezDCJ6W6DP/9oACAEBAAEFAv4k1mJZqzDa7z6gleqsEXW+7yO8sYuU0wHpq9Xui7iTp2K6XVcPxu2A7bVrTYF1Vtbc7vUdpp6DaZq6cTQW9vDb7pjNhmp0nEllDpKhsgGJxbHlNvFXTnhWeFbMWn8xtcwpYw97IytsFVhCK4ahWLWpl1+3WZc2yyztbuw11m+NqE2N+G1GKaTa80/5E9z+HWVbhWxurXbYNsZAZwAXC4A0y7nUVzT148TCP9Cx1MPvBrAhysruZo2otUhZWuPHfTvCmzTnj1Wlamz9aGp4m0SurHlKR9KrQ6HEGmsi6SKgXx23bW5rE5kyyxg3NRtTHt2qluZXqS0bU7FfU7SLSZRdxPVrVXo2e4UgTlwI9W48ATl1jVZHAE5YTl1nLLjgjNdWyE4jMWnsT4L+8sTKtpXzt2i/srrwrU21N5m+1i2AGy5Ua/ULG/ULxP/aAAgBAwABPwH4+MSy3YP9Sqwu3fGP6hGOpY67h/c4ZbAPbGZXUE+3+ZjqHiHQT15mZu6+3r2nb1x8ITExP//aAAgBAgABPwH4xMzn0zAepvQz7TPUf++I9A68TExB5c/CMzMz/9oACAEBAQY/Av0nLtK60R+Uc1+L9PNddx8Y+60msm+ddayshOdI5mHVp8x5LZghEP4mhHm9MXsUINYDrN6+I1RhJBwtc1EGsxgTCe8yG68qjQi/lmtj9wxh80RgM7NDiDqmG9Qj3Q+aVUIoqQy4fZQGKERQ0BUkTA0lOoqhsJg4VHjquCym4IxWiIoTMK2Moz+cUYrVBMGae1o4cUPSMDQeSjDaY4hEWqGZxUXzQoakFA/mQd4TZUnmnhBMMMpKzDCdq4/2oIoaw3Yq07xbVlPOCfGLw1UqhMOvk9KHhUK01fHM2KsTYQ44lNgrX+FEjrx6y0L0crkZv14P7Ce1FHsEm3rSybD5pqYjF7weCaHLAnCOGaazAdzq1F1jctuslMJ4nycfvQy7laEUGV36JXqh/JaUUMG6qaCZxT366i0YiF11MvrAJTxfFC0JExB8GLIShm+NxZWYQDJ5p7Puyv0lJiHE94UJlNsWn3oypCD2oSDnfg5dPE3WaR7VEMBLAlnZSAYFjPtRpLfjn0ogOha2Mu36qoM4aUjcU7kSaRZdn00V4naligJy2zVYu2qE4pUnRljXvrxRBcu3dRXzqHkVU8TmeYg2VP2REq3TPH2Froe83BFgfjn3DagYKH2FzC7vFyQ2zO8onJBxFUf77AfSnuVoZWXDkvW+HJesPcv/2gAIAQECAT8h/wDBKL3wftP+CD7yli5vXdBCKyHk3iK8NUADyw8waArUCASNVvL1FR7bjyQxf9S6E4GFqdvugK7qlhyECEKRzkAv9H7lQJGCa7HaGNqQzllBsVYKwh5HyA20Njzl6ioPtOjpKubn82hTncLfTpNcO26BCEDbY7QgWI8yvY/IPOolAEfAXA545wQquioxpCCWB4lpNBdyHMX3R5LJzkPHtASzIlyEJm6hn8QJe0BmA0DUK5/7FbFWiR2gaEHWna9YIBhjlDb0RCOxI0NSoyRUhmwTnN+CD7BhOy7uFU0RyiGEFEgJpPGwzeGSAGkUMaKUmMbQIEp6wEBCoCmlgKqvEMAoFA9owXhAkCw6h17ynaaYEoVL+Z2C9RBQtPZbjD4P6c25QihhaJR0YqdrqsAQDDYRX6sKxqAocid8N84VPL8Y8ggewbjnpKh9Slw13eC6ieQYF+BD0FCCw9gwjLhjpM6KBMNBFwOAuDygACgUAk1gUZrBnU7l+ggxDYFX+wJbGoBRNSIcdsipo7lWFoJftB+z7T4RFQBef7aIfkLpajSIAizTPDRcSpB1CRLYBwKp0pq2Al6CEtAqx8GBhFnU/aGdzCwNBtr+rqM3e0RAGBjIwM5hXHMjrlC2dhyDpZwgv6x8Qqve/dAKnWOXCpZg9siDMuIT+4B5g2XaCzc8pAC9sosUnVoBBA6xGIIAqlYdtdJUFBzFLMBA3l0E1CLFKgOsrBBgAaGtqjRhHnLpFRBE2MWUHQhKHUsYFlCXt8IVaYsmpEnIFKQCjWgBQawMbRIJqoYKGroKkXgzIqwzlKmChTWVs5wJA4ooqPN4SoA0AtcKsLDoeNzPcj0ECFTBXUR2i650ksVOiBaQhIMFRkQIGTaAcTTYGIKAkaiqjUVGYF0Dggi4MuARdwAGuxp63cAQFRXdoVOl9cy4C2AFlvNzaxioAKlmlIdRrAMiCAIFhgyR0HPMFaW6DAGWV1ggJJQFzA9yIAS8b7eUZyVWIVLmq3/hInFGsRjKbZMIKygKMWBQ1tx0gKLzPIO+v+CgTpKREBkk1B2LQRWz8gMJHuABPVEB77MijrpD4KYJqC/EHCKAUgP4S8n2h+hv0n//2gAMAwECAgEDAgAAEL5EVstzpri28fOX1julq4TeAtPbfgq967nEkencwkS59dODdu4FeQyncXoUS7ZdlwsANbQ/Xn6lk6IOihbQRfeRz14AAMMAMAU4QP/aAAgBAwIBPxD/ADAOAIAw8g1MKAAAK/1rOmwfufUMMRFXA/cR8lgIG+g7wYuopkOCi4/IcdZ+ofSf8l/1xUPUCuHn4CX6RvwUlOJT3Hbv7JNIuk//2gAIAQIBAT8Qzj2NhPzHJzfh5u6R60GC5odEWmjLPP0iH6FBuiVNTU1NTU0+rN5bUnoHiv/aAAgBAQIBPxAGXj4D2meA4CA8FxUHoUUXoMPAcHwHsD0ng4+A4iKADWfVIYXBw8DwEcVOAPEeSCELlbprK5Qhm8v9cCAYoiAC8B6UMhivAHIGAK5omL4oAICVBFQRqCKHgYTBwMB4OPgYFC7ACB31PshtJc/rfesQtTtHh/Qd2ZvBqtgLfQMejLqxza1NYJz+FjfIuSwwAIAAQRUEGxHBxx8H6NtRmRnFqbH3DhiV+5PouHPNaE6VqKKjA8bqktU7byEQJqgtVH+wCP4QdhGUoPm1gQAIAC0Cg6TalL7zW0QztJzyO4HvxMfC/AGEqC3iB/WVgw5tvzhCLUlNpZLjQzXa9O62fMWSMGjB+gV8AyjSkFRRqjxCqp8lqGuNhPm/7UW5gjscxLNPtk0V09YcDpFPCJtU+JZWO6orYKrLaC8S4S7AqoA2FWiZMdRAQ9pffOvyALsQi/MI0tPtKoySC4a+vXVK0mb2UNT1RGsycyT4hjBZBPl7Fk0XR5vlBIdQ6kWNaR/kDEg3+1yWFqWEMV2u1CpXYW5YLtkXIHq/8Qr1lKI+wCGX0Cpzyqr9LrSCgZXn0AwcaxPzG3h1lhW7YAqsJPzMX4MTFNBQfqD9QCgDBibrcHyURGmkEiaDU1GV7d0AW1A6PLjiTQUqHyh/ZzQAB3ie4esJjj4H0GIkEXlC1eQH8BVF0ouUAGPfmwEGqm+HaKvxO2CSSXLGYkMGXGlzH7PiBHo6oMXzmYE5i7bcD6XHCOAOq82KAw31+1nUB+eKPrenVY+U1gLK0dgJ9f3P3lBG3OL8eyXEJlzAMFV3SG7BfgimUvvWUxNbkOwUAALkEtwFYOFeA4CZIiAV1ZDY6azNlYgqb7P4OFb5A84DC9IFkezXRkZSp8QXADpE1QKohcWJoBcI+s3j6grUDuh811lUFUdBxjwYaz0w1m3BVRVFS2lHOaLS/wDT3yBBoNVhdSlAup/JWIWU8kE4YqpM34CH0UYGPa8zLwyzFjUQS8jQQth8oIOQdhiKgTOqGJ9hSJ6FSMYEkuQyIkny0AgxvrM7Tht9Jpvqayp3Tl1UbJLLiYpFoXTWZc05pxpgA8BiAgTgEA9WjZXBVA3eAOLg6iDGSWhWjJubLoyQ3BasoA7oFMMyUAAzA/RgEh88qys7FMFYA+a4AxviPZXATFVZqg9kgdaDPaMV2U3sAKI5lTlWAcAYRLegei/ACFsgntA7GKQ1yhmZhFqv9qp9BI76PuJaKKCGH1DgJAOYEAL7huISNpDxCXTIRMfKV8PKG4ln/9k=" alt="थ्योरी">
+    </div>
+    <h1 class="hero-title">The<span>ori</span></h1>
+    <span class="hero-title-hindi">थ्योरी</span>
+    <p class="hero-subtitle">A Journey Through Flavour & Tradition</p>
+    <span class="hero-subtitle-hindi">स्वाद और परंपरा की एक अविस्मरणीय यात्रा</span>
+    <div class="hero-divider">
+      <div class="hero-divider-line"></div>
+      <div class="hero-divider-diamond"></div>
+      <div class="hero-divider-line"></div>
+    </div>
+    <div class="hero-ctas">
+      <a href="#menu" class="btn-primary">मेनू देखें &nbsp;· Explore Menu</a>
+      <a href="#reservation" class="btn-secondary">मेज़ बुक करें &nbsp;· Reserve</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Discover</span>
+    <div class="scroll-bar"></div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="story-visual">
+    <div class="story-visual-pattern"></div>
+    <div class="story-visual-ring" style="width:280px;height:280px;"></div>
+    <div class="story-visual-ring" style="width:340px;height:340px;animation-delay:1s;"></div>
+    <div class="story-visual-ring" style="width:400px;height:400px;animation-delay:2s;"></div>
+    <img src="data:image/jpeg;base64,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" alt="थ्योरी" class="story-visual-logo">
+  </div>
+  <div class="story-content">
+    <span class="section-label">हमारी कहानी · Our Story</span>
+    <h2 class="section-title">Where Every Meal<br>Tells a Story</h2>
+    <span class="section-title-hindi">जहाँ हर खाना एक कहानी कहता है</span>
+    <p class="section-subtitle">Rooted in tradition, refined by passion</p>
+    <span class="section-subtitle-hindi">परंपरा की जड़ें, जुनून की ऊँचाई</span>
+    <p class="story-text">
+      Theori was born from a deep reverence for the art of fine dining — a space where ancient culinary wisdom meets the elegance of modern craft. Our chefs draw from generations of tradition, transforming the finest seasonal ingredients into experiences that linger long after the last course.
+    </p>
+    <p class="story-text-hindi">थ्योरी की नींव रखी गई उस गहरी श्रद्धा से जो हम भारतीय पाक-कला के प्रति रखते हैं। हमारे रसोइये पीढ़ियों की परंपरा से प्रेरित होकर, सर्वोत्तम मौसमी सामग्री को अद्भुत अनुभव में बदलते हैं।</p>
+    <p class="story-text">
+      Every dish is a dialogue between heritage and innovation, every table a stage for memories to unfold. We believe that true hospitality is felt, not just tasted.
+    </p>
+    <a href="#menu" class="btn-secondary" style="width:fit-content;color:var(--cream);border-color:rgba(184,147,74,0.45);">Discover Our Menu →</a>
+    <div class="story-stats">
+      <div class="fade-in">
+        <span class="stat-num">12+</span>
+        <span class="stat-label">Years of Excellence</span>
+        <span class="stat-label-hindi">उत्कृष्टता के वर्ष</span>
+      </div>
+      <div class="fade-in">
+        <span class="stat-num">48</span>
+        <span class="stat-label">Signature Dishes</span>
+        <span class="stat-label-hindi">विशेष व्यंजन</span>
+      </div>
+      <div class="fade-in">
+        <span class="stat-num">∞</span>
+        <span class="stat-label">Memories Created</span>
+        <span class="stat-label-hindi">यादें जो बनाई</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-header">
+    <span class="section-label">पाक-कला की यात्रा · Culinary Journey</span>
+    <h2 class="section-title">Our Menu</h2>
+    <span class="section-title-hindi">हमारा मेनू</span>
+    <p class="section-subtitle">Crafted with love, served with grace</p>
+    <span class="section-subtitle-hindi">प्रेम से बनाया, शालीनता से परोसा</span>
+    <div class="ornament" style="justify-content:center">
+      <div class="ornament-line short"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-line short"></div>
+    </div>
+  </div>
+  <div class="menu-tabs">
+    <button class="menu-tab active" onclick="switchTab('starters',this)">
+      Starters<span class="tab-hindi">प्रारंभिक</span>
+    </button>
+    <button class="menu-tab" onclick="switchTab('mains',this)">
+      Main Course<span class="tab-hindi">मुख्य व्यंजन</span>
+    </button>
+    <button class="menu-tab" onclick="switchTab('desserts',this)">
+      Desserts<span class="tab-hindi">मिठाई</span>
+    </button>
+    <button class="menu-tab" onclick="switchTab('drinks',this)">
+      Beverages<span class="tab-hindi">पेय पदार्थ</span>
+    </button>
+  </div>
+  <div class="menu-grid">
+    <!-- STARTERS -->
+    <div class="menu-panel active" id="tab-starters">
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">गिल्डेड मशरूम ब्रोथ</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Gilded Mushroom Broth</span>
+          <span class="menu-item-price">₹480</span>
+        </div>
+        <p class="menu-item-desc">Wild forest mushrooms, saffron-infused consommé, truffle oil</p>
+        <span class="menu-item-tag">vegetarian</span>
+      </div>
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">स्पाइस्ड लैम्ब क्रोकेट्स</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Spiced Lamb Croquettes</span>
+          <span class="menu-item-price">₹650</span>
+        </div>
+        <p class="menu-item-desc">Slow-braised lamb, harissa aioli, micro herbs, pomegranate</p>
+      </div>
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">बुर्राता और हेरिटेज टमाटर</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Burrata & Heirloom</span>
+          <span class="menu-item-price">₹520</span>
+        </div>
+        <p class="menu-item-desc">Fresh burrata, heirloom tomatoes, basil oil, aged balsamic</p>
+        <span class="menu-item-tag">vegetarian</span>
+      </div>
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">स्मोक्ड सैल्मन रिलेट</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Smoked Salmon Rillette</span>
+          <span class="menu-item-price">₹720</span>
+        </div>
+        <p class="menu-item-desc">Cold-smoked salmon, capers, dill crème fraîche, rye crisps</p>
+      </div>
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">चुकंदर टार्ट</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Heritage Beetroot Tart</span>
+          <span class="menu-item-price">₹440</span>
+        </div>
+        <p class="menu-item-desc">Roasted beetroot, whipped goat cheese, candied walnuts, honey</p>
+        <span class="menu-item-tag">vegetarian</span>
+      </div>
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">सीयर्ड स्कैलप्स</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Seared Scallops</span>
+          <span class="menu-item-price">₹880</span>
+        </div>
+        <p class="menu-item-desc">Pan-seared scallops, cauliflower purée, crispy capers, lemon</p>
+      </div>
+    </div>
+    <!-- MAINS -->
+    <div class="menu-panel" id="tab-mains">
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">रोगन जोश रॉयल</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Rogan Josh Royale</span>
+          <span class="menu-item-price">₹1,200</span>
+        </div>
+        <p class="menu-item-desc">Slow-cooked lamb in aromatic Kashmiri spices, saffron rice, naan</p>
+      </div>
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">गार्डन बिरयानी</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Garden Biryani</span>
+          <span class="menu-item-price">₹850</span>
+        </div>
+        <p class="menu-item-desc">Aged basmati, seasonal vegetables, dum-cooked, raita, salan</p>
+        <span class="menu-item-tag">vegetarian</span>
+      </div>
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">ब्लैक कॉड मिसो</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Black Cod Miso</span>
+          <span class="menu-item-price">₹1,580</span>
+        </div>
+        <p class="menu-item-desc">Miso-glazed black cod, bok choy, yuzu beurre blanc, sesame</p>
+      </div>
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">पनीर प्रेस्टीज</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Paneer Prestige</span>
+          <span class="menu-item-price">₹780</span>
+        </div>
+        <p class="menu-item-desc">Charcoal-grilled paneer, makhani sauce, microgreens, garlic naan</p>
+        <span class="menu-item-tag">vegetarian</span>
+      </div>
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">ड्राई-एज्ड डक ब्रेस्ट</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Dry-Aged Duck Breast</span>
+          <span class="menu-item-price">₹1,680</span>
+        </div>
+        <p class="menu-item-desc">72-hour dry-aged duck, tamarind jus, wild berry, dauphinoise</p>
+      </div>
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">टेंडरलॉइन थ्योरी</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Tenderloin Theori</span>
+          <span class="menu-item-price">₹2,200</span>
+        </div>
+        <p class="menu-item-desc">Signature beef tenderloin, red wine reduction, truffle pomme purée</p>
+      </div>
+    </div>
+    <!-- DESSERTS -->
+    <div class="menu-panel" id="tab-desserts">
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">केसरी पन्ना कोट्टा</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Saffron Panna Cotta</span>
+          <span class="menu-item-price">₹380</span>
+        </div>
+        <p class="menu-item-desc">Silken saffron panna cotta, rose-cardamom syrup, pistachio brittle</p>
+        <span class="menu-item-tag">vegetarian</span>
+      </div>
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">गर्म चॉकलेट फोंडेंट</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Warm Chocolate Fondant</span>
+          <span class="menu-item-price">₹420</span>
+        </div>
+        <p class="menu-item-desc">Valrhona dark chocolate, salted caramel core, vanilla bean ice cream</p>
+        <span class="menu-item-tag">vegetarian</span>
+      </div>
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">आम टाटिन</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Mango Tatin</span>
+          <span class="menu-item-price">₹360</span>
+        </div>
+        <p class="menu-item-desc">Alphonso mango, buttered caramel, flaky pastry, clotted cream</p>
+        <span class="menu-item-tag">vegetarian</span>
+      </div>
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">थ्योरी स्पेशल प्लेटर</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">The Theori Platter</span>
+          <span class="menu-item-price">₹980</span>
+        </div>
+        <p class="menu-item-desc">Chef's curated selection of four miniature desserts, seasonal</p>
+        <span class="menu-item-tag">signature</span>
+      </div>
+    </div>
+    <!-- DRINKS -->
+    <div class="menu-panel" id="tab-drinks">
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">गोल्ड लीफ मॉकटेल</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Gold Leaf Mocktail</span>
+          <span class="menu-item-price">₹320</span>
+        </div>
+        <p class="menu-item-desc">Passion fruit, lychee, elderflower, sparkling water, edible gold</p>
+        <span class="menu-item-tag">signature</span>
+      </div>
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">गुलाब इलायची लस्सी</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Rose & Cardamom Lassi</span>
+          <span class="menu-item-price">₹220</span>
+        </div>
+        <p class="menu-item-desc">Chilled yogurt, rose water, green cardamom, saffron threads</p>
+        <span class="menu-item-tag">vegetarian</span>
+      </div>
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">दार्जिलिंग फर्स्ट फ्लश चाय</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Darjeeling First Flush</span>
+          <span class="menu-item-price">₹280</span>
+        </div>
+        <p class="menu-item-desc">Rare first-flush Darjeeling, served in hand-poured ceremony style</p>
+        <span class="menu-item-tag">vegetarian</span>
+      </div>
+      <div class="menu-item fade-in">
+        <span class="menu-item-name-hindi">मसाला नींबू पानी</span>
+        <div class="menu-item-header">
+          <span class="menu-item-name">Spiced Nimbu Pani</span>
+          <span class="menu-item-price">₹180</span>
+        </div>
+        <p class="menu-item-desc">Fresh lime, black salt, cumin, mint, sparkling or still</p>
+        <span class="menu-item-tag">vegetarian</span>
+      </div>
+    </div>
+  </div>
+  <div class="menu-cta">
+    <a href="#reservation" class="btn-primary">मेज़ बुक करें · Reserve Your Table</a>
+  </div>
+</section>
+
+<!-- SPECIALS -->
+<section class="specials" id="specials">
+  <span class="section-label" style="display:block;text-align:center">थ्योरी अनुभव · The Theori Experience</span>
+  <h2 class="section-title" style="text-align:center">Beyond the Plate</h2>
+  <span class="section-title-hindi" style="text-align:center;display:block">थाली से परे</span>
+  <p class="section-subtitle" style="text-align:center">Moments crafted to be remembered</p>
+  <span class="section-subtitle-hindi" style="text-align:center;display:block">यादगार पलों की रचना</span>
+  <div class="specials-grid">
+    <div class="special-card fade-in">
+      <div class="special-icon">
+        <svg viewBox="0 0 26 26" fill="none" stroke="#B8934A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 3 L15.5 8.5 L22 9.3 L17.5 13.7 L18.7 20.2 L13 17.2 L7.3 20.2 L8.5 13.7 L4 9.3 L10.5 8.5 Z"/>
+        </svg>
+      </div>
+      <h3 class="special-title">Chef's Table</h3>
+      <span class="special-title-hindi">शेफ़ की खास मेज़</span>
+      <p class="special-desc">An intimate, exclusive dining experience where our head chef presents a personally curated tasting menu, table-side, for up to six guests.</p>
+    </div>
+    <div class="special-card fade-in">
+      <div class="special-icon">
+        <svg viewBox="0 0 26 26" fill="none" stroke="#B8934A" stroke-width="1.2" stroke-linecap="round">
+          <path d="M13 5 C13 5 7 9 7 15 C7 18.3 9.7 21 13 21 C16.3 21 19 18.3 19 15 C19 9 13 5 13 5Z"/>
+          <path d="M10 14 Q13 10 16 14"/>
+          <path d="M11 17 Q13 14.5 15 17"/>
+        </svg>
+      </div>
+      <h3 class="special-title">Seasonal Tasting</h3>
+      <span class="special-title-hindi">मौसमी चखना मेनू</span>
+      <p class="special-desc">A seven-course journey through the season's finest produce, thoughtfully paired with curated non-alcoholic botanical infusions.</p>
+    </div>
+    <div class="special-card fade-in">
+      <div class="special-icon">
+        <svg viewBox="0 0 26 26" fill="none" stroke="#B8934A" stroke-width="1.2" stroke-linecap="round">
+          <rect x="4" y="10" width="18" height="13" rx="2"/>
+          <path d="M8 10 V7 C8 4.8 10.2 3 13 3 C15.8 3 18 4.8 18 7 V10"/>
+          <circle cx="13" cy="16.5" r="1.5"/>
+        </svg>
+      </div>
+      <h3 class="special-title">Private Dining</h3>
+      <span class="special-title-hindi">निजी भोजन कक्ष</span>
+      <p class="special-desc">Host your celebrations in our exclusive private dining room, with bespoke menus and dedicated service for up to twenty guests.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section class="reservation" id="reservation">
+  <div class="reservation-inner">
+    <span class="section-label">आरक्षण · Book Your Table</span>
+    <h2 class="section-title">Make a Reservation</h2>
+    <span class="section-title-hindi">मेज़ बुक करें</span>
+    <p class="section-subtitle">We look forward to welcoming you</p>
+    <span class="section-subtitle-hindi">हम आपका स्वागत करने के लिए उत्सुक हैं</span>
+    <div class="ornament" style="justify-content:center">
+      <div class="ornament-line short"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-line short"></div>
+    </div>
+    <form class="reservation-form" onsubmit="handleReservation(event)">
+      <div class="form-group">
+        <label class="form-label">पूरा नाम · Full Name</label>
+        <input class="form-input" type="text" placeholder="आपका पूरा नाम" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">फ़ोन नंबर · Phone</label>
+        <input class="form-input" type="tel" placeholder="+91 00000 00000" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">ईमेल · Email</label>
+        <input class="form-input" type="email" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">मेहमानों की संख्या · Guests</label>
+        <select class="form-select form-input">
+          <option>1 Guest · 1 मेहमान</option>
+          <option>2 Guests · 2 मेहमान</option>
+          <option selected>3–4 Guests</option>
+          <option>5–6 Guests</option>
+          <option>7–10 Guests</option>
+          <option>Private Dining (10+)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">तारीख · Date</label>
+        <input class="form-input" type="date" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">समय · Time</label>
+        <select class="form-select form-input">
+          <option>12:00 PM – Lunch · दोपहर का भोजन</option>
+          <option>1:00 PM – Lunch</option>
+          <option>2:00 PM – Lunch</option>
+          <option>7:00 PM – Dinner · रात का भोजन</option>
+          <option>7:30 PM – Dinner</option>
+          <option>8:00 PM – Dinner</option>
+          <option>8:30 PM – Dinner</option>
+          <option>9:00 PM – Dinner</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label class="form-label">विशेष अनुरोध · Special Requests</label>
+        <textarea class="form-textarea form-input" placeholder="आहार संबंधी आवश्यकताएं, उत्सव, विशेष व्यवस्था…"></textarea>
+      </div>
+      <div class="form-group full">
+        <button type="submit" class="btn-reserve">आरक्षण की पुष्टि करें · Confirm Reservation</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section" id="gallery">
+  <div class="gallery-header">
+    <span class="section-label">दृश्य कहानियाँ · Visual Stories</span>
+    <h2 class="section-title">The Theori World</h2>
+    <span class="section-title-hindi">थ्योरी की दुनिया</span>
+    <p class="section-subtitle">Glimpses of elegance</p>
+    <span class="section-subtitle-hindi">शालीनता की झलकियाँ</span>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item wide" style="aspect-ratio:2/1;">
+      <div class="gallery-placeholder">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#9A7635" stroke-width="1.2"><rect x="4" y="8" width="32" height="24" rx="2"/><circle cx="14" cy="17" r="3.5"/><path d="M4 26 L13 17 L20 24 L26 18 L36 28"/></svg>
+        <p>The Grand Hall</p>
+      </div>
+      <div class="gallery-overlay"><div class="gallery-overlay-text"><span class="en">The Grand Dining Hall</span>भव्य भोजन कक्ष</div></div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder">
+        <svg width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="#9A7635" stroke-width="1.2"><rect x="4" y="8" width="32" height="24" rx="2"/><circle cx="14" cy="17" r="3.5"/><path d="M4 26 L13 17 L20 24 L26 18 L36 28"/></svg>
+        <p>Signature Dish</p>
+      </div>
+      <div class="gallery-overlay"><div class="gallery-overlay-text"><span class="en">Signature Creations</span>विशेष रचनाएँ</div></div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder">
+        <svg width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="#9A7635" stroke-width="1.2"><rect x="4" y="8" width="32" height="24" rx="2"/><circle cx="14" cy="17" r="3.5"/><path d="M4 26 L13 17 L20 24 L26 18 L36 28"/></svg>
+        <p>Table Setting</p>
+      </div>
+      <div class="gallery-overlay"><div class="gallery-overlay-text"><span class="en">Table Art</span>मेज़ की सजावट</div></div>
+    </div>
+    <div class="gallery-item tall" style="aspect-ratio:1/2;">
+      <div class="gallery-placeholder">
+        <svg width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="#9A7635" stroke-width="1.2"><rect x="4" y="8" width="32" height="24" rx="2"/><circle cx="14" cy="17" r="3.5"/><path d="M4 26 L13 17 L20 24 L26 18 L36 28"/></svg>
+        <p>Chef's Kitchen</p>
+      </div>
+      <div class="gallery-overlay"><div class="gallery-overlay-text"><span class="en">Behind the Pass</span>रसोई के पीछे</div></div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder">
+        <svg width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="#9A7635" stroke-width="1.2"><rect x="4" y="8" width="32" height="24" rx="2"/><circle cx="14" cy="17" r="3.5"/><path d="M4 26 L13 17 L20 24 L26 18 L36 28"/></svg>
+        <p>Desserts</p>
+      </div>
+      <div class="gallery-overlay"><div class="gallery-overlay-text"><span class="en">Sweet Endings</span>मीठा समापन</div></div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder">
+        <svg width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="#9A7635" stroke-width="1.2"><rect x="4" y="8" width="32" height="24" rx="2"/><circle cx="14" cy="17" r="3.5"/><path d="M4 26 L13 17 L20 24 L26 18 L36 28"/></svg>
+        <p>Private Dining</p>
+      </div>
+      <div class="gallery-overlay"><div class="gallery-overlay-text"><span class="en">Private Spaces</span>निजी स्थान</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div>
+      <span class="section-label">हमें खोजें · Find Us</span>
+      <h2 class="section-title">Visit Theori</h2>
+      <span class="section-title-hindi">थ्योरी आइए</span>
+      <p class="section-subtitle">Come, let us welcome you</p>
+      <span class="section-subtitle-hindi">आइए, हम आपका स्वागत करें</span>
+      <div class="ornament">
+        <div class="ornament-line short"></div>
+        <div class="ornament-diamond"></div>
+        <div class="ornament-line long"></div>
+      </div>
+      <div class="contact-info-item fade-in">
+        <div class="contact-icon">
+          <svg viewBox="0 0 18 18" fill="none" stroke="#B8934A" stroke-width="1.2" stroke-linecap="round"><path d="M9 1C6.2 1 4 3.3 4 6.1C4 10.2 9 17 9 17C9 17 14 10.2 14 6.1C14 3.3 11.8 1 9 1Z"/><circle cx="9" cy="6" r="1.8"/></svg>
+        </div>
+        <div>
+          <span class="contact-label">पता · Location</span>
+          <span class="contact-value">12, Elegance Avenue<br>Bhopal, Madhya Pradesh 462001</span>
+          <span class="contact-value-hindi">१२, एलिगेंस एवेन्यू, भोपाल, म.प्र.</span>
+        </div>
+      </div>
+      <div class="contact-info-item fade-in">
+        <div class="contact-icon">
+          <svg viewBox="0 0 18 18" fill="none" stroke="#B8934A" stroke-width="1.2" stroke-linecap="round"><path d="M3 3H15C15.6 3 16 3.4 16 4V12C16 12.6 15.6 13 15 13H3C2.4 13 2 12.6 2 12V4C2 3.4 2.4 3 3 3Z"/><path d="M2 4L9 8.5L16 4"/></svg>
+        </div>
+        <div>
+          <span class="contact-label">आरक्षण · Reservations</span>
+          <span class="contact-value">reservations@theori.in<br>+91 98765 43210</span>
+          <span class="contact-value-hindi">बुकिंग के लिए हमें कॉल या ईमेल करें</span>
+        </div>
+      </div>
+      <div class="contact-info-item fade-in">
+        <div class="contact-icon">
+          <svg viewBox="0 0 18 18" fill="none" stroke="#B8934A" stroke-width="1.2" stroke-linecap="round"><circle cx="9" cy="9" r="7"/><path d="M9 5V9L11.5 11.5"/></svg>
+        </div>
+        <div>
+          <span class="contact-label">समय · Hours</span>
+          <span class="contact-value">Lunch: 12:00 – 3:30 PM<br>Dinner: 7:00 – 11:00 PM<br>Closed Tuesdays</span>
+          <span class="contact-value-hindi">मंगलवार को बंद</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="map-placeholder">
+        <div class="map-pin">
+          <svg width="40" height="50" viewBox="0 0 40 50" fill="none">
+            <path d="M20 1C9.5 1 1 9.5 1 20C1 33.5 20 49 20 49C20 49 39 33.5 39 20C39 9.5 30.5 1 20 1Z" fill="rgba(184,147,74,0.15)" stroke="#B8934A" stroke-width="1.5"/>
+            <circle cx="20" cy="20" r="7" fill="rgba(184,147,74,0.3)" stroke="#B8934A" stroke-width="1.5"/>
+            <circle cx="20" cy="20" r="3" fill="#B8934A"/>
+          </svg>
+        </div>
+        <p class="map-placeholder-text">Theori — Fine Dine Elegance</p>
+        <p class="map-placeholder-hindi">थ्योरी · भोपाल</p>
+        <a href="https://maps.google.com" target="_blank" class="btn-secondary" style="font-size:10px;padding:10px 24px;">नक्शा खोलें · Open in Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL STRIP -->
+<div class="social-strip">
+  <div>
+    <p class="social-strip-text">Follow Our Journey</p>
+    <p class="social-strip-hindi">हमारी यात्रा का हिस्सा बनें</p>
+    <p class="social-strip-sub">@theori.finedine — Stories of taste, told daily</p>
+  </div>
+  <div class="social-links">
+    <a href="#" class="social-link" aria-label="Instagram">
+      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="14" height="14" rx="4"/><circle cx="9" cy="9" r="3.2"/><circle cx="13.2" cy="4.8" r="0.8" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a href="#" class="social-link" aria-label="Facebook">
+      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M12 2H10C8.3 2 7 3.3 7 5V7H5V10H7V16H10V10H12L12.5 7H10V5C10 4.4 10.4 4 11 4H12V2Z"/></svg>
+    </a>
+    <a href="#" class="social-link" aria-label="WhatsApp">
+      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1.5C4.9 1.5 1.5 4.9 1.5 9C1.5 10.4 1.9 11.7 2.6 12.8L1.5 16.5L5.3 15.4C6.4 16 7.7 16.5 9 16.5C13.1 16.5 16.5 13.1 16.5 9C16.5 4.9 13.1 1.5 9 1.5Z"/><path d="M6.5 7C6.5 7 6.3 9 8.5 11C10.7 13 12.5 12.5 12.5 12.5"/></svg>
+    </a>
+    <a href="#" class="social-link" aria-label="Google">
+      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M9 2C5.1 2 2 5.1 2 9C2 12.9 5.1 16 9 16C12.9 16 16 12.9 16 9H9"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Theori</span>
+      <span class="footer-brand-hindi">थ्योरी · Fine Dine Elegance</span>
+      <p class="footer-brand-desc">A sanctuary of fine dining where tradition meets artistry. Every visit is a celebration of flavour, refinement, and the joy of gathering together.</p>
+      <p class="footer-brand-desc-hindi">एक ऐसी जगह जहाँ परंपरा और कला का संगम होता है। हर मुलाकात स्वाद, संस्कृति और एकजुटता का उत्सव है।</p>
+      <p style="font-size:10px;letter-spacing:0.22em;color:rgba(184,147,74,0.5);text-transform:uppercase;">Fine Dine · भोपाल · Elegance</p>
+    </div>
+    <div>
+      <span class="footer-col-title">Explore · देखें</span>
+      <ul class="footer-links">
+        <li><a href="#story">Our Story · हमारी कहानी</a></li>
+        <li><a href="#menu">Menu · मेनू</a></li>
+        <li><a href="#specials">Experiences</a></li>
+        <li><a href="#gallery">Gallery · गैलरी</a></li>
+        <li><a href="#reservation">Reserve · बुक करें</a></li>
+      </ul>
+    </div>
+    <div class="footer-hours">
+      <span class="footer-col-title">Hours · समय</span>
+      <p><strong style="color:rgba(247,241,228,0.65)">Monday – Saturday</strong></p>
+      <p>Lunch: 12:00 – 3:30 PM</p>
+      <p>Dinner: 7:00 – 11:00 PM</p>
+      <p style="margin-top:0.75rem"><strong style="color:rgba(247,241,228,0.65)">Sunday · रविवार</strong></p>
+      <p>Brunch: 11:00 AM – 3:00 PM</p>
+      <p>Dinner: 7:00 – 10:30 PM</p>
+    </div>
+    <div>
+      <span class="footer-col-title">Contact · संपर्क</span>
+      <ul class="footer-links">
+        <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+        <li><a href="mailto:reservations@theori.in">reservations@theori.in</a></li>
+        <li><a href="#">12, Elegance Avenue</a></li>
+        <li><a href="#">Bhopal, MP 462001</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>
+      <p class="footer-copy">© 2025 Theori. All rights reserved.</p>
+      <span class="footer-copy-hindi">© २०२५ थ्योरी · सर्वाधिकार सुरक्षित</span>
+    </div>
+    <ul class="footer-bottom-links">
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Cancellation</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 60);
+  });
+  function toggleMobileMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.menu-panel').forEach(p => { p.classList.remove('active'); p.style.display = 'none'; });
+    btn.classList.add('active');
+    const panel = document.getElementById('tab-' + tab);
+    panel.classList.add('active');
+    panel.style.display = 'contents';
+  }
+  document.querySelectorAll('.menu-panel').forEach(p => { if (!p.classList.contains('active')) p.style.display = 'none'; });
+  function handleReservation(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-reserve');
+    btn.textContent = '✓ आरक्षण की पुष्टि हो गई — We will contact you shortly';
+    btn.style.background = '#3D7335'; btn.disabled = true;
+    setTimeout(() => { btn.textContent = 'आरक्षण की पुष्टि करें · Confirm Reservation'; btn.style.background = ''; btn.disabled = false; e.target.reset(); }, 5000);
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
